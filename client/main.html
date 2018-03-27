@@ -1,0 +1,73 @@
+<head>
+  <title>private messagin' app</title>
+</head>
+
+<body>
+  <div>private meteor messagin' app</div>
+  {{> main_content}}
+</body> 
+
+<template name="main_content">
+  {{#if get_curr_view }}
+    {{> messenger_view }}
+  {{else}}
+    {{> sign_in_view }}
+  {{/if}}
+</template>
+
+
+<template name="sign_in_view">
+  <!-- Username Input Form -->
+  <div id="text_input_row">
+    <form id="username_input_form">
+      <input type="text" id="username_text" name="username_textbox" placeholder="Log in or Sign up here">
+    </form>
+  </div>
+
+  <!-- Button Row -->
+  <div id="sign_in_btn_row">
+    <button id="log_in_button">Log in</button>
+    <button id="sign_up_button">Sign up</button>
+  </div>
+
+  <!-- Error Display -->
+  <div id="error_row">
+    {{get_error_msg}}
+  </div>
+</template>
+
+<template name="messenger_view">
+  <p>Welcome {{get_curr_user}}</p>
+
+  <!-- User chat selection menu -->
+  <select id="user_selector">
+    <option disabled selected value> Select Chat Bud! </option>
+    {{#each get_users}}
+      <option>{{this}}</option>
+    {{/each}}
+  </select>
+
+  <!-- Messenger Interface -->
+  {{#if get_chat_friend != ""}}
+    <div class="messages">
+
+    <!-- Message Input -->
+    <div id="input_box">
+      <p>Message: <input type="text" id="message"></p>
+      <button id="msg_input_btn">Send</button>
+    </div>
+
+    <!-- Messages List -->
+    <ul>
+      {{#each get_messages}}
+        <li class="post">{{from}}: {{message}}<button class="delete_msg_btn" id="{{_id}}">X</button><br></li>
+      {{/each}}
+    </ul>
+  </div>
+  {{/if}}
+
+  <!-- Logout button -->
+  <div id="msger_btn_row">
+    <button id="log_out_btn">Logout</button>
+  </div>
+</template>

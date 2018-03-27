@@ -1,0 +1,9 @@
+html {
+  padding: 20px;
+  font-family: Verdana, sans-serif;
+}
+
+.post {
+	padding: 10px;
+	line-height: 150%;
+}
